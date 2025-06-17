@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<main class="container mt-4">
+    <a class="btn btn-primary mb-3" asp-page="/Create">Nova Tarefa</a>
+
+    @if (Model.Todos.Count == 0)
+    {
+        <p>Nenhuma tarefa encontrada.</p>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var todo in Model.Todos)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>@todo.Title</strong><br />
+                        <small>@todo.Description</small>
+                    </div>
+                    <span class="badge @(todo.IsDone ? "bg-success" : "bg-warning")">
+                        @(todo.IsDone ? "Concluída" : "Pendente")
+                    </span>
+                </li>
+            }
+        </ul>
+    }
+</main>

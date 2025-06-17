@@ -1,0 +1,25 @@
+﻿@page
+@model Tasks.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Nova Tarefa";
+}
+
+<main class="container mt-4">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input asp-for="NewTodo.Title" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea asp-for="NewTodo.Description" class="form-control"></textarea>
+        </div>
+        <div class="form-check mb-3">
+            <input asp-for="NewTodo.IsDone" class="form-check-input" />
+            <label class="form-check-label">Concluída?</label>
+        </div>
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</main>
