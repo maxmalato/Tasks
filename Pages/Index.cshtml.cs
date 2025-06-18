@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Tasks.Data;
@@ -20,5 +21,20 @@ public class IndexModel : PageModel
         Todos = await _context.Todos
             .OrderByDescending(t => t.CreatedAt)
             .ToListAsync();
+    }
+
+    // Exclusão de todas as tarefas
+    public async Task<IActionResult> OnPostDeleteAllAsync()
+    {
+        
+        var allTodos = await _context.Todos.ToListAsync();
+
+        if (allTodos.Any())
+        {
+            _context.Todos.RemoveRange(allTodos);
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToPage("Index");
     }
 }

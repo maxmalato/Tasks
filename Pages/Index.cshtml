@@ -6,6 +6,9 @@
 
 <main class="container mt-4">
     <a class="btn btn-primary mb-3" asp-page="/Create">Nova Tarefa</a>
+    <form method="post" asp-page-handler="DeleteAll" onsubmit="return confirm('Tem certeza que deseja excluir todas as tarefas?');">
+        <button type="submit" class="btn btn-danger">Excluir Todas</button>
+    </form>
 
     @if (Model.Todos.Count == 0)
     {
@@ -24,6 +27,11 @@
                     <span class="badge @(todo.IsDone ? "bg-success" : "bg-warning")">
                         @(todo.IsDone ? "Concluída" : "Pendente")
                     </span>
+
+                    <div>
+                        <a class="btn btn-secondary btn-sm" asp-page="/Edit" asp-route-id="@todo.Id">Editar</a>
+                        <a class="btn btn-danger btn-sm" asp-page="/Delete" asp-route-id="@todo.Id">Excluir</a>
+                    </div>
                 </li>
             }
         </ul>
