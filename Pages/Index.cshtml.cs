@@ -16,6 +16,7 @@ public class IndexModel : PageModel
         _context = context;
     }
 
+    // Listagem de todos os ToDos
     public async Task OnGetAsync()
     {
         Todos = await _context.Todos
