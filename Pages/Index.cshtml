@@ -1,15 +1,34 @@
 ﻿@page
+
+@using Tasks.Pages.Shared
+
 @model IndexModel
+
 @{
     ViewData["Title"] = "Home";
 }
 
+@await Html.PartialAsync("Shared/_ConfirmModal", new _ConfirmModalModel {
+ModalId = "deleteAllModal",
+    Title = "Confirmar Exclusão",
+    Message = "Tem certeza que deseja excluir todas as tarefas?",
+    Handler = "DeleteAll",
+    ConfirmButtonText = "Sim, excluir tudo",
+    ConfirmButtonColor = "danger",
+    HeaderColor = "warning"
+})
+
 <main class="container mt-4">
     <div class="d-flex gap-4">
     <a class="btn btn-primary mb-3" asp-page="/Create">Nova Tarefa</a>
-    <form method="post" asp-page-handler="DeleteAll" onsubmit="return confirm('Tem certeza que deseja excluir todas as tarefas?');">
-        <button type="submit" class="btn btn-danger">Excluir Todas</button>
-    </form>
+    <button 
+        type="button"
+        class="btn btn-danger mb-3" 
+        data-bs-toggle="modal" 
+        data-bs-target="#deleteAllModal"
+                @(Model.Todos.Count == 0 ? "disabled" : "")>
+            Excluir todas as Tarefas
+    </button>
     </div>
 
     @if (Model.Todos.Count == 0)
