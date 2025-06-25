@@ -20,7 +20,8 @@ public class IndexModel : PageModel
     public async Task OnGetAsync()
     {
         Todos = await _context.Todos
-            .OrderByDescending(t => t.CreatedAt)
+            .OrderBy(t => t.IsDone)
+            .ThenByDescending(t => t.CreatedAt)
             .ToListAsync();
     }
 
