@@ -8,27 +8,17 @@
     ViewData["Title"] = "Home";
 }
 
-@await Html.PartialAsync("Shared/_ConfirmModal", new _ConfirmModalModel {
-ModalId = "deleteAllModal",
-    Title = "Confirmar Exclusão",
-    Message = "Tem certeza que deseja excluir todas as tarefas?",
-    Handler = "DeleteAll",
-    ConfirmButtonText = "Sim, excluir tudo",
-    ConfirmButtonColor = "danger",
-    HeaderColor = "warning"
-})
-
 <main class="container mt-4">
     <div class="d-flex gap-4">
-    <a class="btn btn-primary mb-3" asp-page="/Create">Nova Tarefa</a>
-    <button 
-        type="button"
-        class="btn btn-danger mb-3" 
-        data-bs-toggle="modal" 
-        data-bs-target="#deleteAllModal"
+        <a class="btn btn-primary mb-3" asp-page="/Create">Nova Tarefa</a>
+        <button 
+                type="button"
+                class="btn btn-danger mb-3"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteAllModal"
                 @(Model.Todos.Count == 0 ? "disabled" : "")>
             Excluir todas as Tarefas
-    </button>
+        </button>
     </div>
 
     @if (Model.Todos.Count == 0)
@@ -45,7 +35,7 @@ ModalId = "deleteAllModal",
                         <p class="fw-bold fs-5">@todo.Title</p>
                         <p>@todo.Description</p>
                         <span class="badge @(todo.IsDone ? "bg-success" : "bg-warning")">
-                        @(todo.IsDone ? "Concluída" : "Pendente")
+                            @(todo.IsDone ? "Concluída" : "Pendente")
                         </span>
                     </div>
 
@@ -58,3 +48,5 @@ ModalId = "deleteAllModal",
         </ul>
     }
 </main>
+
+<partial name="_DeleteAllModal" model="Model" />
