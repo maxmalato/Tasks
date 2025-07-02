@@ -1,0 +1,26 @@
+﻿@page "{id:int}"
+
+@model Tasks.Pages.EditModel
+@{
+    ViewData["Title"] = "Editar Tarefa";
+}
+
+<main class="container mt-4">
+    <form method="post">
+        <input type="hidden" asp-for="Todos.Id" />
+        <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input asp-for="Todos.Title" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Descrição</label>
+            <textarea asp-for="Todos.Description" class="form-control"></textarea>
+        </div>
+        <div class="form-check mb-3">
+            <input asp-for="Todos.IsDone" class="form-check-input" />
+            <label class="form-check-label">Concluída?</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</main>

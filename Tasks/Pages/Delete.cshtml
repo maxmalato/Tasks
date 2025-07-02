@@ -1,0 +1,21 @@
+﻿@page "{id:int}"
+
+@model Tasks.Pages.DeleteModel
+
+@{
+    ViewData["Title"] = "Excluir Tarefa";
+}
+
+<main class="container mt-4">
+    <div class="alert alert-warning">
+        <p>Tem certeza que deseja remover esta tarefa?</p>
+        <p>@Model.Todos.Title</p>
+        <small>@Model.Todos.Description</small>
+    </div>
+
+    <form method="post">
+        <input type="hidden" asp-for="Todos.Id" />
+        <button type="submit" class="btn btn-danger">Remover</button>
+        <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</main>
